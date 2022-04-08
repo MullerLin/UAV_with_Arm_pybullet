@@ -22,6 +22,8 @@ p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
 p.setGravity(0, 0, -10)
 _ = p.loadURDF("plane.urdf", useMaximalCoordinates=True)
 robot_id = p.loadURDF("r2d2.urdf", useMaximalCoordinates=True)
+robot_id = p.loadURDF("r2d2.urdf", useMaximalCoordinates=True)
+robot_id = p.loadURDF("r2d2.urdf", useMaximalCoordinates=True)
 
 # 可以使用的关节
 available_joints_indexes = [i for i in range(p.getNumJoints(robot_id)) if p.getJointInfo(robot_id, i)[2] != p.JOINT_FIXED]

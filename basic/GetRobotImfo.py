@@ -1,6 +1,8 @@
+import os
 import pybullet as p
 import pybullet_data
 from time import sleep
+from pprint import pprint
 
 # 链接物理引擎
 p.connect(p.GUI)
@@ -10,13 +12,16 @@ datapath = pybullet_data.getDataPath()
 p.setAdditionalSearchPath(datapath)
 
 # 加载模型
-robot_id = p.loadURDF("r2d2.urdf", [0, 0, 0.5])
+# 加载机器人，并设置加载的机器人的位姿
+startPos = [0, 0, 1]
+startOrientation = p.getQuaternionFromEuler([0, 0, 0])
+robot_id = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/dofbot_arm.urdf",  startPos, startOrientation)
 
 # 输出基本信息
 joint_num = p.getNumJoints(robot_id)
-print("r2d2的节点数量为：", joint_num)
+print("robot的节点数量为：", joint_num)
 
-print("r2d2的信息：")
+print("robot的关节信息：")
 for joint_index in range(joint_num):
     info_tuple = p.getJointInfo(robot_id, joint_index)
     print(f"关节序号：{info_tuple[0]}\n\
@@ -36,3 +41,8 @@ for joint_index in range(joint_num):
             父节点frame的关节位置：{info_tuple[14]}\n\
             父节点frame的关节方向：{info_tuple[15]}\n\
             父节点的索引，若是基座返回-1：{info_tuple[16]}\n\n")
+
+# 可以使用的关节
+available_joints_indexes = [i for i in range(p.getNumJoints(robot_id)) if p.getJointInfo(robot_id, i)[2] != p.JOINT_FIXED]
+print("可动关节：", available_joints_indexes)
+pprint([p.getJointInfo(robot_id, i)[1] for i in available_joints_indexes])
