@@ -22,8 +22,6 @@ p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
 p.setGravity(0, 0, -10)
 _ = p.loadURDF("plane.urdf", useMaximalCoordinates=True)
 robot_id = p.loadURDF("r2d2.urdf", useMaximalCoordinates=True)
-robot_id = p.loadURDF("r2d2.urdf", useMaximalCoordinates=True)
-robot_id = p.loadURDF("r2d2.urdf", useMaximalCoordinates=True)
 
 # 可以使用的关节
 available_joints_indexes = [i for i in range(p.getNumJoints(robot_id)) if p.getJointInfo(robot_id, i)[2] != p.JOINT_FIXED]
@@ -42,6 +40,14 @@ head_joints_indexes = [i for i in available_joints_indexes if "head" in str(p.ge
 
 target_v = 20                  # 电机达到的预定角速度（rad/s）
 max_force = 10                  # 电机能够提供的力，这个值决定了机器人运动时的加速度，太快会翻车哟，单位N
+
+location, _ = p.getBasePositionAndOrientation(robot_id)
+text_name_id = p.addUserDebugText(
+    text="I'm R2D2",
+    textPosition=location,
+    textColorRGB=[0, 0, 1],
+    textSize=1.2,
+)
 
 for i in range(10000):
     p.stepSimulation()
@@ -66,6 +72,19 @@ for i in range(10000):
         cameraPitch=-30,
         cameraTargetPosition=location
     )
+
+    # print(location)
+    temp = list(location)
+    temp[2] = temp[2] + 1.2
+    location = tuple(temp)
+    text_name_id = p.addUserDebugText(
+        text="I'm R2D2",
+        textPosition=location,
+        textColorRGB=[0, 0, 1],
+        textSize=1.2,
+        replaceItemUniqueId = text_name_id
+    )
+
     time.sleep(1 / 240)         # 模拟器一秒模拟迭代240步
 
 # 断开连接

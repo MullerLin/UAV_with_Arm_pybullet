@@ -33,7 +33,7 @@ p.setGravity(0, 0, -10)
 planeId = p.loadURDF("plane.urdf")
 
 # 加载机器人，并设置加载的机器人的位姿
-startPos = [0, 0, 1]
+startPos = [0, -1, 1]
 startOrientation = p.getQuaternionFromEuler([0, 0, 0])
 #boxId = p.loadURDF("r2d2.urdf", startPos, startOrientation)
 drone = np.zeros(3)
