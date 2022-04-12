@@ -1,6 +1,9 @@
+import time
+
 import pybullet as p
 import pybullet_data
 from time import sleep
+import numpy as np
 
 use_gui = True
 if use_gui:
@@ -8,13 +11,18 @@ if use_gui:
 else:
     cid = p.connect(p.DIRECT)
 
-p.conInfigureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 0)
-p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
+# 配置渲染逻辑
+# p.configureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 0)
 p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
+p.configureDebugVisualizer(p.COV_ENABLE_GUI, 1)  # debug允许
 
+# 添加资源
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 plane_id = p.loadURDF("plane.urdf", useMaximalCoordinates=False)
 robot_id = p.loadURDF("r2d2.urdf", basePosition=[0, 0, 0.5], useMaximalCoordinates=False)
+
+# 障碍物
+
 
 p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 1)
 p.setGravity(0, 0, -10)
@@ -30,8 +38,8 @@ debug_text_id = p.addUserDebugText(
     textSize=2.5
 )
 
-maxV = 30
-maxF = 30
+maxV = 20
+maxF = 20
 
 t = 2  # 左前或右前的轮子的速度差的倍数
 
@@ -39,6 +47,7 @@ logging_id = p.startStateLogging(p.STATE_LOGGING_VIDEO_MP4, "./log/keyboard2.mp4
 
 while True:
     p.stepSimulation()
+
     key_dict = p.getKeyboardEvents()
 
     if len(key_dict):
@@ -198,6 +207,9 @@ while True:
             textSize=2.5,
             replaceItemUniqueId=debug_text_id
         )
+
+    p.getCameraImage(480, 320)
+    time.sleep(1/240)
 
 p.stopStateLogging(logging_id)
 
