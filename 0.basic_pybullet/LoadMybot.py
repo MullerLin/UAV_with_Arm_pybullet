@@ -44,7 +44,8 @@ drone[1] = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/hb.urdf
 
 startPos = [1, 0, 1]
 arm = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/dofbot_arm.urdf",   basePosition=[0,-0.2,0], useFixedBase=True)
-
+dobot = p.loadURDF("/asset/dobot/dobot.urdf",useFixedBase=True)
+#box = p.loadURDF("/asset/miniBox.urdf", useFixedBase=True)
 # change the appearance of DOFBOT parts
 p.changeVisualShape(arm, -1, rgbaColor=[0, 0, 0, 1])
 p.changeVisualShape(arm, 0, rgbaColor=[0, 1, 0, 1])
