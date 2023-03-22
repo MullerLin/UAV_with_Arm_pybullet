@@ -37,14 +37,14 @@ startPos = [0, -1, 1]
 startOrientation = p.getQuaternionFromEuler([0, 0, 0])
 #boxId = p.loadURDF("r2d2.urdf", startPos, startOrientation)
 drone = np.zeros(3)
-drone[0] = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/grasp_drone.urdf",  startPos, startOrientation)
+# drone[0] = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/grasp_drone.urdf",  startPos, startOrientation)
 
 startPos = [1, 1, 1]
 drone[1] = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/hb.urdf",  startPos, startOrientation)
 
 startPos = [1, 0, 1]
 arm = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/dofbot_arm.urdf",   basePosition=[0,-0.2,0], useFixedBase=True)
-dobot = p.loadURDF("/asset/dobot/dobot.urdf",useFixedBase=True)
+# dobot = p.loadURDF("/asset/dobot/dobot.urdf",useFixedBase=True)
 #box = p.loadURDF("/asset/miniBox.urdf", useFixedBase=True)
 # change the appearance of DOFBOT parts
 p.changeVisualShape(arm, -1, rgbaColor=[0, 0, 0, 1])

@@ -15,7 +15,7 @@ p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
 # 配置渲染机制
 p.configureDebugVisualizer(p.COV_ENABLE_GUI, 1)
-p.configureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 0)
+p.configureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 1)
 p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
 
 # 设置重力，加载模型

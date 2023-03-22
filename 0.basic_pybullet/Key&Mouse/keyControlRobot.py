@@ -8,8 +8,8 @@ if use_gui:
 else:
     cid = p.connect(p.DIRECT)
 
-p.conInfigureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 0)
 p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
+p.configureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 0)
 p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
 
 p.setAdditionalSearchPath(pybullet_data.getDataPath())

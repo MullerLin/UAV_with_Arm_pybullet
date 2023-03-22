@@ -16,7 +16,7 @@ plane_id = p.loadURDF("plane.urdf")
 robot_id = p.loadURDF("r2d2.urdf", basePosition=[0, 0, 0.5])
 
 # 配置渲染逻辑
-p.configureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 0)
+p.configureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 1)
 p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
 
 # 绘制直线
