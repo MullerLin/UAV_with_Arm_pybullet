@@ -15,7 +15,7 @@ p.setAdditionalSearchPath(datapath)
 # 加载机器人，并设置加载的机器人的位姿
 startPos = [0, 0, 1]
 startOrientation = p.getQuaternionFromEuler([0, 0, 0])
-robot_id = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/grasp_drone_2.urdf",  startPos, startOrientation)
+robot_id = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/hbarmfixed.urdf",  startPos, startOrientation)
 # robot_id = p.loadURDF("r2d2.urdf", basePosition=[0, 0, 0.5], useMaximalCoordinates=False)
 # 输出基本信息
 joint_num = p.getNumJoints(robot_id)

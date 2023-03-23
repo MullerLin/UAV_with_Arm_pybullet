@@ -17,7 +17,7 @@ else:
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 
 # 配置渲染机制
-p.configureDebugVisualizer(p.COV_ENABLE_GUI, 1)
+p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
 p.configureDebugVisualizer(p.COV_ENABLE_TINY_RENDERER, 0)
 p.configureDebugVisualizer(p.COV_ENABLE_RENDERING, 0)
 
@@ -74,36 +74,25 @@ for i in range(10000):
     p.stepSimulation()
     # p.resetBasePositionAndOrientation(drone, [0, -0.5, 1.5], [0, 0, 0, 1])
 
-    pos, quat = p.getBasePositionAndOrientation(drone)
-    matrix = np.array(p.getMatrixFromQuaternion(quat)).reshape(3, 3)
-    gravity = np.dot([0, 0, 10.5], matrix)
-    gravity = np.dot(np.linalg.inv(matrix), [0, 0, 10.5])
-    print(gravity)
-    # target_orn = [-0.5233, 0, 0]
-    # target_orn = p.getQuaternionFromEuler(target_orn)
-    # # target_position = [j * math.sin(float(i)*math.pi/6) for j in startPos]
-    # target_position = [1, -1, 1]
-    # p.resetBasePositionAndOrientation(
-    #     bodyUniqueId=drone,
-    #     posObj=target_position,
-    #     ornObj=target_orn,
-    # )
-
-    p.applyExternalForce(
-        objectUniqueId = drone,
-        linkIndex = -1,
-        forceObj = gravity,
-        posObj=[0, 0, 0],
-        flags=p.LINK_FRAME
+    target_orn = [0, 0, 0]
+    target_orn = p.getQuaternionFromEuler(target_orn)
+    # target_position = [j * math.sin(float(i)*math.pi/6) for j in startPos]
+    target_position = [1, -1, 1]
+    p.resetBasePositionAndOrientation(
+        bodyUniqueId=drone,
+        posObj=target_position,
+        ornObj=target_orn,
     )
-    target_pose = [0, 0, 0]
+
+
+    target_pose = [-0.785, 1.57, 0]
     for j in range(joint_index):
         # p.resetJointState(drone, (grasp_index + j), rest_poses_dofbot[j])
         p.setJointMotorControl2(
             bodyUniqueId=drone,
             jointIndex=grasp_index + j,
             controlMode=p.POSITION_CONTROL,
-            targetPosition=rest_poses_dofbot[j],
+            targetPosition=target_pose[j],
             force=0.5,
         )
         # jointPosition, _, _, _ =p.getJointState(

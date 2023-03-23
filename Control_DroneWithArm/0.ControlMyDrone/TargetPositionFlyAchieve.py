@@ -12,8 +12,8 @@ from Controller.PID_v1 import DroneModel, DroneControl
 # egl = pkgutil.get_loader('eglRenderer')
 
 # 连接物理引擎
-# use_gui = False
-use_gui = True
+use_gui = False
+# use_gui = True
 if use_gui:
     serve_id = p.connect(p.GUI)
 else:

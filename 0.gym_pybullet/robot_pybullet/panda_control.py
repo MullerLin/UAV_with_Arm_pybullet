@@ -5,6 +5,7 @@ import time
 # cameraTargetPosition=[0.55,-0.35,0.2]
 p.connect(p.GUI)
 p.setGravity(0,0,-10)
+p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
 # p.configureDebugVisualizer(p.COV_ENABLE_SINGLE_STEP_RENDERING)
 p.setAdditionalSearchPath(pd.getDataPath())
 p.resetDebugVisualizerCamera(cameraDistance=1,cameraYaw=0,\
@@ -15,15 +16,7 @@ tableUid=p.loadURDF("table/table.urdf",basePosition=[0.5,0,-0.65])
 trayUid=p.loadURDF("tray/traybox.urdf",basePosition=[0.65,0,0])
 
 objectUid=p.loadURDF("random_urdfs/000/000.urdf",basePosition=[0.7,0,0.1])
-# object1Uid=p.loadURDF("random_urdfs/001/001.urdf",basePosition=[0.7,0.1,0.7])
-# object2Uid=p.loadURDF("random_urdfs/002/002.urdf",basePosition=[0.6,-0.2,0.7])
-# object3Uid=p.loadURDF("random_urdfs/003/003.urdf",basePosition=[0.8,0.1,0.7])
-# object4Uid=p.loadURDF("random_urdfs/004/004.urdf",basePosition=[0.7,-0.1,0.7])
-# object5Uid=p.loadURDF("random_urdfs/005/005.urdf",basePosition=[0.6,0.1,0.3])
-# object6Uid=p.loadURDF("random_urdfs/006/006.urdf",basePosition=[0.8,-0.2,0.4])
-# object7Uid=p.loadURDF("random_urdfs/007/007.urdf",basePosition=[0.6,0.2,0.4])
-# object8Uid=p.loadURDF("random_urdfs/008/008.urdf",basePosition=[0.7,-0.1,0.4])
-# object9Uid=p.loadURDF("random_urdfs/009/009.urdf",basePosition=[0.6,0.1,0.4])
+
 
 state_durations = [0.25, 0.25, 0.25, 0.25]
 control_dt = 1./240.

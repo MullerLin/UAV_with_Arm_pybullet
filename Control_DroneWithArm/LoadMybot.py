@@ -55,8 +55,8 @@ drones = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/grasp_dro
 
 startPos = [1, -1, 1]
 arm_down = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/dofbot_arm_down.urdf",   basePosition=startPos, useFixedBase=True)
-
-
+startPos = [1, 1, 1]
+gripper = p.loadURDF("tray/traybox.urdf",  startPos, startOrientation, useFixedBase=False)
 # startPos = [1, 0, 1]
 # arm = p.loadURDF(os.path.dirname(os.path.abspath(__file__))+"/asset/dofbot_arm.urdf",   basePosition=startPos, useFixedBase=True)
 

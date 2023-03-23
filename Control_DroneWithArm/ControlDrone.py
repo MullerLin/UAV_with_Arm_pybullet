@@ -63,24 +63,24 @@ p.setRealTimeSimulation(0)
 
 for i in range(10000):
     p.stepSimulation()
-    # p.resetBasePositionAndOrientation(drone, [0, -0.5, 1.5], [0, 0, 0, 1])
-    # target_pose = [0, 0, 0, 0]
-    # for j in range(4):
-    #     # p.resetJointState(drone, (grasp_index + j), rest_poses_dofbot[j])
-    #     p.setJointMotorControl2(
-    #         bodyUniqueId=drone,
-    #         jointIndex=grasp_index + j,
-    #         controlMode=p.POSITION_CONTROL,
-    #         targetPosition=target_pose[j],
-    #         force=0.5,
-    #     )
+    p.resetBasePositionAndOrientation(drone, [0, -0.5, 1.5], [0, 0, 0, 1])
+    target_pose = [0, 0, 0, 0]
+    for j in range(4):
+        # p.resetJointState(drone, (grasp_index + j), rest_poses_dofbot[j])
+        p.setJointMotorControl2(
+            bodyUniqueId=drone,
+            jointIndex=grasp_index + j,
+            controlMode=p.POSITION_CONTROL,
+            targetPosition=target_pose[j],
+            force=0.5,
+        )
 
     p.configureDebugVisualizer(p.COV_ENABLE_SINGLE_STEP_RENDERING)
 
-    target_position = [j * math.sin(float(i)*math.pi/6) for j in startPos]
-    p.resetBasePositionAndOrientation(
-        bodyUniqueId=drone,
-        posObj=target_position,
-        ornObj=startOrientation,
-    )
+    # target_position = [j * math.sin(float(i)*math.pi/6) for j in startPos]
+    # p.resetBasePositionAndOrientation(
+    #     bodyUniqueId=drone,
+    #     posObj=target_position,
+    #     ornObj=startOrientation,
+    # )
     time.sleep(1/240)

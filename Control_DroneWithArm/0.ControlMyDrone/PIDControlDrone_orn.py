@@ -12,8 +12,8 @@ from Controller.PID_v1 import DroneModel, DroneControl
 # egl = pkgutil.get_loader('eglRenderer')
 
 # 连接物理引擎
-use_gui = False
-# use_gui = True
+# use_gui = False
+use_gui = True
 if use_gui:
     serve_id = p.connect(p.GUI)
 else:
@@ -86,21 +86,21 @@ NUM_TO = int (control_freq_hz * To_sec)
 # for i in range (NUM_TO, NUM_WP):
 #     Trajectory_POS[i, :] = np.array(Target_VEC) + np.array(INIT_XYZS)
 
-displace = 1
-period = int(NUM_WP/(duration_sec/To_sec))
-Target_VEC = [displace, displace, displace]
-for i in range (period):
-    Trajectory_POS[i, :] = np.array(INIT_XYZS)
-for i in range (period, 2*period):
-    Trajectory_POS[i, :] = np.array(Target_VEC) / NUM_TO * (i+1-NUM_TO) + np.array(INIT_XYZS)
-for i in range (2*period, 3*period):
-    Trajectory_POS[i, :] = np.array(Target_VEC) + np.array(INIT_XYZS)
-pos_drone = np.array(Target_VEC) + np.array(INIT_XYZS)
-Target_VEC  = [-displace, -displace, -displace]
-for i in range (3*period, 4*period):
-    Trajectory_POS[i, :] = np.array(Target_VEC) / NUM_TO * (i+1-3*NUM_TO) + pos_drone
-for i in range (4*period, 5*period):
-    Trajectory_POS[i, :] = np.array(Target_VEC) + pos_drone
+# displace = 1
+# period = int(NUM_WP/(duration_sec/To_sec))
+# Target_VEC = [displace, displace, displace]
+# for i in range (period):
+#     Trajectory_POS[i, :] = np.array(INIT_XYZS)
+# for i in range (period, 2*period):
+#     Trajectory_POS[i, :] = np.array(Target_VEC) / NUM_TO * (i+1-NUM_TO) + np.array(INIT_XYZS)
+# for i in range (2*period, 3*period):
+#     Trajectory_POS[i, :] = np.array(Target_VEC) + np.array(INIT_XYZS)
+# pos_drone = np.array(Target_VEC) + np.array(INIT_XYZS)
+# Target_VEC  = [-displace, -displace, -displace]
+# for i in range (3*period, 4*period):
+#     Trajectory_POS[i, :] = np.array(Target_VEC) / NUM_TO * (i+1-3*NUM_TO) + pos_drone
+# for i in range (4*period, 5*period):
+#     Trajectory_POS[i, :] = np.array(Target_VEC) + pos_drone
 
 Trajectory_ORN  = np.zeros((NUM_WP, 3))
 orientation = np.pi/6
@@ -170,8 +170,8 @@ for i in range(PHY_STEPS):
             control_timestep=CTRL_EVERY_N_STEPS * TIMESTEP ,
             cur_pos=pos,
             cur_quat=quat,
-            # target_pos=INIT_XYZS,
-            target_pos=Trajectory_POS[wp_counter, 0:3],
+            target_pos=INIT_XYZS,
+            # target_pos=Trajectory_POS[wp_counter, 0:3],
             target_rpy=Trajectory_ORN[wp_counter, 0:3]
         )
 
@@ -192,7 +192,7 @@ for i in range(PHY_STEPS):
         print("[INFO] target_force : ", target_force, "target_torques : ", target_torques)
         print("[INFO] current position : X:{:+06.4f}, Y:{:+06.4f}, Z:{:+06.4f}".format(pos[0], pos[1], pos[2]),
               "current rpy : R:{:+06.4f}, Y:{:+06.4f}, P:{:+06.4f}".format(rpy[0], rpy[1], rpy[2]))
-        print("[INFO] target position  : X:{:+06.4f}, Y:{:+06.4f}, Z:{:+06.4f}".format(Trajectory_POS[wp_counter, 0],  Trajectory_POS[wp_counter, 1], Trajectory_POS[wp_counter, 2]),
+        print("[INFO] target position  : X:{:+06.4f}, Y:{:+06.4f}, Z:{:+06.4f}".format(INIT_XYZS[0],  INIT_XYZS[1], INIT_XYZS[2]),
                 "target rpy  : R:{:+06.4f}, Y:{:+06.4f}, P:{:+06.4f}".format(INIT_RPYS[0], INIT_RPYS[1], INIT_RPYS[2]))
         print("*********************************************************************************************************************************")
 
@@ -200,7 +200,7 @@ for i in range(PHY_STEPS):
         # 记录
 
         state_logger[wp_counter, :] = np.hstack([target_force[0:3], target_torques[0:3], pos[0:3], rpy[0:3],
-                                                 Trajectory_POS[wp_counter, 0:3], Trajectory_ORN[wp_counter, 0:3], vel[0:3],
+                                                 INIT_XYZS[0:3], Trajectory_ORN[wp_counter, 0:3], vel[0:3],
                                                  target_rpy[0:3], pos_e[0:3], rpy_e[0:3]])
         timestamps[wp_counter] = i / simulation_freq_hz
 
