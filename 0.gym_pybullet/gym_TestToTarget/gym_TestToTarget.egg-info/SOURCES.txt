@@ -1,6 +1,0 @@
-setup.py
-gym_TestToTarget.egg-info/PKG-INFO
-gym_TestToTarget.egg-info/SOURCES.txt
-gym_TestToTarget.egg-info/dependency_links.txt
-gym_TestToTarget.egg-info/requires.txt
-gym_TestToTarget.egg-info/top_level.txt
